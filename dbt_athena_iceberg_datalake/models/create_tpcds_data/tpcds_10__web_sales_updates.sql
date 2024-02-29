@@ -6,6 +6,7 @@
 ) -%}
 
 select *, 
-CAST('2022-01-01' as timestamp) AS extraction_timestamp,
-'I' AS op
+CAST('2022-01-02' as timestamp) AS extraction_timestamp,
+'U' AS op
 from {{relation}}
+LIMIT 10000
