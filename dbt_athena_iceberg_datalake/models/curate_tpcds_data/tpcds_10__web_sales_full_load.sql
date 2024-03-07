@@ -1,1 +1,0 @@
-select * from {{ ref('tpcds_10__web_sales')}}

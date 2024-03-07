@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: tpcds
+    database: athena_tpcds_connector
+    schema: tpcds1
+    tables:
+      - name: web_sales
