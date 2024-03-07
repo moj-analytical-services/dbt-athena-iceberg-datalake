@@ -3,4 +3,4 @@
 > [!WARNING]
 > Work in Progress
 
-This repo, once complete, will demo how to use AWS Athena, Apache Iceberg and dbt-athena to implement a data lake using the TPCDS data set 
+This repo demos how to use AWS Athena, Apache Iceberg and dbt-athena to implement a data lakehouse using the TPCDS data set 
