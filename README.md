@@ -15,7 +15,7 @@ The source table is inserted as many times as required into the `store_sales_raw
 
 #### Curate
 
-Initially, the `store_sales` table is created using the `store_sales_raw` table. New rows from the `store_sales_raw` table are then merged into the `store_sales` table. 
+The `store_sales_wap` table first is created from the `store_sales_raw` table using CTAS. New rows from the `store_sales_raw` table are then merged into the `store_sales_wap` table. The `store_sales` view is only refreshed if all tests pass against `store_sales_wap`. 
 
 #### Instructions
 
@@ -30,7 +30,7 @@ Initially, the `store_sales` table is created using the `store_sales_raw` table.
 
 3. Authenticate with AWS credentials
 
-4. Run the following code to generate the equivalent of the scale = 3000 `store_sales_source`:
+4. Run the following code to generate the equivalent of the scale = 3000 `store_sales` table:
 
 ```bash
 for i in {1..300}; do cp models/extract/store_sales_raw__0.sql models/extract/store_sales_raw__${i}.sql; done
@@ -38,4 +38,5 @@ dbt run --select source
 dbt run --full-refresh --select extract
 dbt run --full-refresh --select curate
 dbt run --select "config.materialized:incremental"
+dbt run --select store_sales
 ```
