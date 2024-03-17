@@ -5,4 +5,4 @@ sources:
     database: athena_tpcds_connector
     schema: tpcds10
     tables:
-      - name: web_sales
+      - name: store_sales

@@ -5,17 +5,18 @@
 }}
 
 {% if is_incremental() %}
-    select *, 
+    SELECT *, 
     '2022-01-02' AS extraction_timestamp,
     'U' AS op
-    from {{ source('tpcds','web_sales') }}
+    FROM {{ source('tpcds','store_sales') }}
     LIMIT 10000
 
 {% else %}
 
-    select *, 
+    SELECT *, 
     '2022-01-01' AS extraction_timestamp,
     'I' AS op
-    from {{ source('tpcds','web_sales') }}
+    FROM {{ source('tpcds','store_sales') }}
+    LIMIT 0
 
 {% endif %}
