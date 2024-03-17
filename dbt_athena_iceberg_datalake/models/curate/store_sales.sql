@@ -1,21 +1,11 @@
 {{
     config(
-        materialized='incremental',
-        table_type='iceberg',
-        incremental_strategy='merge',
-        unique_key=["ss_item_sk", "ss_ticket_number"],
+        materialized='view'
     )
 }}
 
-{% if is_incremental() %}
+{% set current_timestamp = modules.datetime.datetime.now() %}
 
-    SELECT *
-    FROM {{ ref('store_sales_raw') }}
-    WHERE extraction_timestamp > (SELECT MAX(extraction_timestamp) FROM {{ this }})
-
-{% else %}
-
-    SELECT *
-    FROM {{ ref('store_sales_raw') }}
-
-{% endif %}
+SELECT * 
+FROM {{ ref('store_sales_wap') }}
+FOR TIMESTAMP AS OF TIMESTAMP '{{ current_timestamp }} UTC'
