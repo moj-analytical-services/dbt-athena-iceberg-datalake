@@ -4,9 +4,11 @@
     {{
         config(
             materialized='view',
-            post_hook="INSERT INTO {{ ref('store_sales_raw') }}
+            post_hook=["INSERT INTO {{ ref('store_sales_raw') }}
                       SELECT {{ dbt_utils.star(from=ref('store_sales_raw')) }}
-                      FROM {{ this }}"
+                      FROM {{ this }}",
+                      "DROP VIEW {{ this }}"
+            ]
         )
     }}
 

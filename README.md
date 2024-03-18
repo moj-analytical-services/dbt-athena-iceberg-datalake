@@ -30,10 +30,10 @@ The `store_sales_wap` table first is created from the `store_sales_raw` table us
 
 3. Authenticate with AWS credentials
 
-4. Run the following code to generate the equivalent of the scale = 3000 `store_sales` table:
+4. Run the following code to generate the equivalent of the scale = 1000 `store_sales` table:
 
 ```bash
-for i in {1..300}; do cp models/extract/store_sales_raw__0.sql models/extract/store_sales_raw__${i}.sql; done
+for i in {1..99}; do cp models/extract/store_sales_raw__0.sql models/extract/store_sales_raw__${i}.sql; done
 dbt run --select source
 dbt run --full-refresh --select extract
 dbt run --full-refresh --select curate
